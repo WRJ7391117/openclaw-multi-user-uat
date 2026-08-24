@@ -37,3 +37,16 @@ Each successful apply creates a timestamped backup under `~/.openclaw/patch-back
 Rollback selects the newest compatible backup unless one is supplied explicitly. It refuses restoration when plugin version, plugin root, or active patched hashes do not match the metadata. This prevents an old backup from overwriting a later upstream release.
 
 Official package upgrades may replace the runtime patch. Prefer an upstream-supported multi-user UAT implementation when one exists; otherwise rerun detection and review any drift before updating this Skill's exact patterns.
+
+## IM recipient guard
+
+`feishu_im_user_message.send` requires both `receive_id_type` and `receive_id`. A model can occasionally omit `receive_id` even though the schema marks it required; forwarding that value as `undefined` produces Feishu's generic `invalid receive_id`, which is easily misdiagnosed as a tenant restriction.
+
+The separate IM guard manager patches only `src/tools/oapi/im/message.js`. It:
+
+- makes the tool description explicitly require the same-application search result;
+- rejects a missing ID or a prefix that does not match `open_id`/`chat_id` before any network request;
+- returns a retryable explanation without echoing the identifier;
+- removes the raw recipient identifier from normal send logging.
+
+A real tenant or availability restriction should be considered only after a send request contains the exact same-application recipient ID and Feishu still rejects it.

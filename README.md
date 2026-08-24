@@ -1,6 +1,6 @@
 # OpenClaw Multi-User UAT
 
-A reusable Codex plugin and Skill for safely detecting, applying, verifying, and rolling back a multi-user Feishu/Lark UAT patch for OpenClaw.
+A reusable Codex plugin and Skill for safely detecting, applying, verifying, and rolling back multi-user Feishu/Lark UAT and IM recipient guards for OpenClaw.
 
 The patch lets each user admitted by OpenClaw's existing conversation policy authorize and operate user-scoped tools with their own identity. It does not create another Feishu channel plugin and does not weaken administrator-only application management.
 
@@ -30,6 +30,12 @@ python3 skills/openclaw-multi-user-uat/scripts/manage_patch.py apply --dry-run
 python3 skills/openclaw-multi-user-uat/scripts/manage_patch.py apply --restart
 python3 skills/openclaw-multi-user-uat/scripts/manage_patch.py verify --live
 python3 skills/openclaw-multi-user-uat/scripts/manage_patch.py rollback --restart
+
+python3 skills/openclaw-multi-user-uat/scripts/manage_im_receive_id_guard.py status
+python3 skills/openclaw-multi-user-uat/scripts/manage_im_receive_id_guard.py apply --dry-run
+python3 skills/openclaw-multi-user-uat/scripts/manage_im_receive_id_guard.py apply --restart
+python3 skills/openclaw-multi-user-uat/scripts/manage_im_receive_id_guard.py verify
+python3 skills/openclaw-multi-user-uat/scripts/manage_im_receive_id_guard.py rollback --restart
 ```
 
 `status` and `verify` are read-only. `apply`, `rollback`, and Gateway restart change the local OpenClaw runtime and should be run only when explicitly intended.
@@ -45,6 +51,8 @@ openclaw plugins inspect openclaw-lark --json
 It applies only when both owner gates and all sender/token isolation invariants match exactly. Official plugin upgrades may overwrite the runtime patch. After an upgrade, run `status` again; unfamiliar upstream source is reported as `mixed/drifted` and is never edited automatically.
 
 See [the design reference](skills/openclaw-multi-user-uat/references/design.md) for the exact security and rollback model.
+
+The IM guard prevents an omitted or mismatched `receive_id` from being forwarded to Feishu as a misleading `invalid receive_id` request. It also reminds agents that private-message `open_id` values must come from a user search performed under the same application.
 
 ## Verification limits
 

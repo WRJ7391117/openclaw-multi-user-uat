@@ -1,4 +1,4 @@
 interface:
   display_name: "OpenClaw Multi-User UAT"
-  short_description: "Install and verify per-user Feishu UAT support"
-  default_prompt: "Use $openclaw-multi-user-uat to install or verify reusable multi-user Feishu UAT support in OpenClaw."
+  short_description: "Verify Feishu user identity and recipient guards"
+  default_prompt: "Use $openclaw-multi-user-uat to verify OpenClaw Feishu multi-user identity and IM recipient guards."
