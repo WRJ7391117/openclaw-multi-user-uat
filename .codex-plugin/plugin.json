@@ -1,0 +1,26 @@
+{
+  "name": "openclaw-multi-user-uat",
+  "version": "0.1.0",
+  "description": "Install, verify, and roll back a fail-closed OpenClaw Feishu multi-user UAT patch.",
+  "author": {
+    "name": "Roger",
+    "url": "https://github.com/WRJ7391117"
+  },
+  "homepage": "https://github.com/WRJ7391117/openclaw-multi-user-uat#readme",
+  "repository": "https://github.com/WRJ7391117/openclaw-multi-user-uat",
+  "license": "MIT",
+  "keywords": ["openclaw", "feishu", "lark", "oauth", "uat", "multi-user"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "OpenClaw Multi-User UAT",
+    "shortDescription": "Reusable per-user Feishu authorization patch",
+    "longDescription": "Safely detects, applies, verifies, and rolls back the OpenClaw Lark multi-user UAT patch while preserving sender-bound identity and per-user token isolation.",
+    "developerName": "Roger",
+    "category": "Productivity",
+    "capabilities": ["Local automation"],
+    "defaultPrompt": [
+      "Check whether my OpenClaw Feishu multi-user UAT patch is healthy.",
+      "Reapply the OpenClaw multi-user UAT patch after a plugin upgrade."
+    ]
+  }
+}

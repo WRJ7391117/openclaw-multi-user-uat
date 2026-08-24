@@ -1,0 +1,9 @@
+OpenClaw Multi-User UAT
+Copyright (c) 2026 Roger
+
+The patch matcher includes limited source fragments from
+@larksuite/openclaw-lark for exact structural identification.
+
+@larksuite/openclaw-lark
+Copyright (c) 2026 ByteDance Ltd. and/or its affiliates
+SPDX-License-Identifier: MIT
